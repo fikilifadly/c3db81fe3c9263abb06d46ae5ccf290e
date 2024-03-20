@@ -1,5 +1,5 @@
 <?php
-class BaseController
+class BaseController extends Filter
 {
     public function view($view, $data = [])
     {

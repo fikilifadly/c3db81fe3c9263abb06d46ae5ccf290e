@@ -8,11 +8,12 @@ $db = 'test_database';
 try {
     $conn = new PDO("pgsql:host=$host;dbname=$db", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected to PostgreSQL successfully";
 } catch (PDOException $e) {
     die("Connection failed " . $e->getMessage());
 }
 
-define('connection', $conn);
+define('DB_CONNECTION', $conn);
 
 // echo "Connected to PostgreSQL successfully";
 
