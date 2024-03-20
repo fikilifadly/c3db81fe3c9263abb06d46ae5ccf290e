@@ -27,14 +27,16 @@ class User extends Database
         $query = 'SELECT *
         FROM ' . '"Users"
         WHERE email = ' . $email;
-        return $this->query($query)->fetch();
+        return $this->query($query)->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getUserByEmail($email)
     {
         $query = 'SELECT * FROM ' . '"Users" WHERE email = ' . "'" . $email . "'";
-        return $this->query($query)->fetch();
+        return $this->query($query)->fetch(PDO::FETCH_ASSOC);
     }
+
+
 
     public function addUser($data)
     {

@@ -1,0 +1,21 @@
+{
+    "name": "your-vendor-name/your-project-name",
+    "require": {
+        "vlucas/phpdotenv": "^5.2",
+        "firebase/php-jwt": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan optimize",
+            "php artisan config:cache"
+        ]
+    },
+    "config": {
+        "php": ">=7.4"
+    }
+}

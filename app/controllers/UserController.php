@@ -27,14 +27,13 @@ class UserController extends BaseController
 
         $fields = [
             'email' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => 'required'
         ];
 
         $messages = [
             'email.required' => 'Email harus diisi!',
             'email.email' => 'Email harus berupa email valid!',
             'password.required' => 'Password harus diisi!',
-            'password.min' => 'Password minimal 6 karakter!'
         ];
 
         [$inputs, $errors] = $this->filter($data, $fields, $messages);
@@ -50,6 +49,41 @@ class UserController extends BaseController
             header('Content-Type: application/json');
             echo json_encode($data);
             exit();
+        } else {
+            $isExist = $this->user->getUserByEmail($inputs['email']);
+            if (!$isExist) {
+                $data = [
+                    'status' => 401,
+                    'message' => 'Invalid Email or Password'
+                ];
+                header('HTTP/1.1 400 Bad Request');
+                header('Content-Type: application/json');
+                echo json_encode($data);
+                exit();
+            } else {
+                if (!password_verify($inputs['password'], $isExist['password'])) {
+                    $data = [
+                        'status' => 401,
+                        'message' => 'Invalid Email or Password'
+                    ];
+                    header('HTTP/1.1 401 Bad Request');
+                    header('Content-Type: application/json');
+                    echo json_encode($data);
+                    exit();
+                }
+
+                // karna gak ngerti pake composer di docker maka pake ini
+                $access_token = password_hash($inputs['email'], PASSWORD_BCRYPT);
+
+                $data = [
+                    'status' => 200,
+                    'message' => 'Success',
+                    '$access_token' => $access_token
+                ];
+                header('Content-Type: application/json');
+                header('HTTP/1.1 200 OK');
+                echo json_encode($data);
+            }
         }
     }
 
@@ -74,7 +108,7 @@ class UserController extends BaseController
         $fields = [
             'name' => 'required|min:1',
             'email' => 'required|email|min:1',
-            'password' => 'required|min:1'
+            'password' => 'required|min:6'
         ];
 
         $messages = [
