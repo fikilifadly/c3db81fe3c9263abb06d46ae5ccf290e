@@ -101,6 +101,19 @@ class UserController extends BaseController
             echo json_encode($data);
             exit();
         } else {
+
+            $isExist = $this->user->getUserByEmail($inputs['email']);
+            if ($isExist) {
+                $data = [
+                    'status' => 400,
+                    'message' => 'Email already exist'
+                ];
+                header('HTTP/1.1 400 Bad Request');
+                header('Content-Type: application/json');
+                echo json_encode($data);
+                exit();
+            }
+
             $this->user->addUser($inputs);
 
             $data = [

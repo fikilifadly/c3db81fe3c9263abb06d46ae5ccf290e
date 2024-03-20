@@ -32,9 +32,7 @@ class User extends Database
 
     public function getUserByEmail($email)
     {
-        $query = 'SELECT *
-        FROM ' . '"Users"
-        WHERE email = ' . $email;
+        $query = 'SELECT * FROM ' . '"Users" WHERE email = ' . "'" . $email . "'";
         return $this->query($query)->fetch();
     }
 
