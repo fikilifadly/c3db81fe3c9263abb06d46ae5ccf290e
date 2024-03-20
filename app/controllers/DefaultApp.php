@@ -4,11 +4,12 @@ class DefaultApp extends BaseController
 {
     public function index($url)
     {
-        if (empty($url)) {
-            $data = ['title' => 'Home'];
-            return $this->view('home/index', $data); #passing variable ke view
-        }
-        $data = ['title' => 'PAGE ' . strtoupper($url) . ' NOT FOUND'];
-        $this->view('404', $data);
+        $data = [
+            'message' => 'NOT FOUND',
+        ];
+        $this->view('template/header', $data);
+        header('Content-Type: application/json');
+        header("HTTP/1.0 404 Not Found");
+        echo json_encode($data);
     }
 }

@@ -6,7 +6,7 @@ class BaseController extends Filter
         if (count($data) > 0) {
             extract($data);
         }
-        require_once __DIR__ . '/../views/' . $view . '.php';
+        // require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
     public function redirect($url)

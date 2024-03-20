@@ -2,8 +2,8 @@
 class Sanitization
 {
     const FILTERS = [
-        'string' => FILTER_SANITIZE_STRING,
         'email' => FILTER_SANITIZE_EMAIL,
+        'required' => FILTER_FLAG_EMPTY_STRING_NULL,
     ];
 
     private function array_trim(array $items)
@@ -18,7 +18,7 @@ class Sanitization
         }, $items);
     }
 
-    public function sanitize(array $inputs, array $fields = [], int $default_filter = FILTER_SANITIZE_SPECIAL_CHARS, array $filters = self::FILTERS, bool $trim = true)
+    public function sanitize(array $inputs, array $fields = [], int $default_filter = FILTER_SANITIZE_SPECIAL_CHARS, array $filters = self::FILTERS, bool $trim = true): array
     {
         if ($fields) {
             foreach ($fields as $key => $field) {
