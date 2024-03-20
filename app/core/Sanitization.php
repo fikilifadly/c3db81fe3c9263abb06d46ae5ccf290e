@@ -22,7 +22,7 @@ class Sanitization
     {
         if ($fields) {
             foreach ($fields as $key => $field) {
-                if ($field == "string" && isset($inputs[$key])) {
+                if ($field && isset($inputs[$key])) {
                     $tempvar = strip_tags($inputs[$key]);
                     $inputs[$key] = $tempvar;
                 }

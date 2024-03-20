@@ -40,8 +40,8 @@ class User extends Database
 
     public function addUser($data)
     {
-        $query = 'INSERT INTO "Users" (name, email, password)
-        VALUES (:name, :email, :password)';
-        return $this->query($query, $data);
+        $newdate = new DateTime();
+        $query = 'INSERT INTO ' . '"Users" ' . '( name, email, password, "createdAt", "updatedAt" ) VALUES (' . "'" . $data['name'] . "', '"  . $data['email'] . "', '" . password_hash($data['password'], PASSWORD_BCRYPT) . "', '" . $newdate->format('Y-m-d H:i:s') . "', '" . $newdate->format('Y-m-d H:i:s') . "')";
+        return $this->query($query);
     }
 }
