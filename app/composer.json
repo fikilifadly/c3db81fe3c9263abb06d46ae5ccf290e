@@ -1,0 +1,17 @@
+{
+    "name": "fiki/app",
+    "autoload": {
+        "psr-4": {
+            "Fiki\\App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "fikilifadly",
+            "email": "fikilifadly@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

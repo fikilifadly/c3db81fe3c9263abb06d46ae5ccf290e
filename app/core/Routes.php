@@ -15,8 +15,8 @@ class Routes
         $router->post('/user/login', ['UserController', 'login']);
 
         #message
-        $router->get('/message', ['MessageController', 'index']);
-        $router->post('/message/add', ['MessageController', 'add']);
+        $router->post('/messages/add', ['MessageController', 'sendMessage']);
+        $router->get('/messages', ['MessageController', 'index']);
 
 
         $router->run();
